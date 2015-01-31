@@ -1,5 +1,14 @@
-var app = require('../app');
-var app2 = require('unirest');
+var app       = require('../app');
+var app2      = require('unirest');
+var Cleverbot = require('cleverbot-node');
+
+// Create one global cleverbot for the server
+    var marvin = new Cleverbot();
+    function callback(resp){
+        marvin.write(resp['message'], callback);
+        console.log(resp['message']);
+    }
+// End Cleverbot instantiation
 
 var routes = {};
 
@@ -28,6 +37,15 @@ routes.sentiment = function(req, res){
        // console.log(url)
           res.send(result)
     });
+
+}
+
+routes.cleverbot = function (req, res) {
+    console.log(req.query.text, res);
+    marvin.write(req.query.text, function (response) {
+        res.json(response);
+    });
+
 
 }
 

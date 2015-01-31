@@ -10,11 +10,43 @@
         <div class="row clearfix">
             <div class="column full">
                 <h1>BeepBoop</h1>
+                <div id="user"></div>
+                <div id="cb"></div>
             </div>
         </div>
     </div>
-    <script type="text/javascript" src="public/js/microphone.js"></script>
+
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.2/jquery.min.js"></script>
     <script type="text/javascript">
+        var user = document.getElementById('user');
+        var cb   = document.getElementById('cb');
+
+        var recognition            = new webkitSpeechRecognition();
+        recognition.continuous     = true;
+        recognition.interimResults = false;
+
+        recognition.onresult = function(event) {
+            console.log(event);
+            for (var i = 0; i < event.results.length; i++) {
+                var text = event.results[i][0].transcript;
+
+                console.log(text);
+
+                $.ajax({
+                    url: '/cleverbot',
+                    type: 'GET',
+                    data: {text: text},
+                })
+                .done(function(data) {
+                    console.log(data.message);
+                })
+                .fail(function() {
+                    console.log("error");
+                });
+
+            };
+        }
+        recognition.start();
 
     </script>
 </body>
