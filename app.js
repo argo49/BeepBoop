@@ -14,8 +14,8 @@ app.use(express.static(path.join(__dirname, 'public')));
 // Routes
 app.get('/', routes.index);
 app.get('/css/normalize.css', routes.normalizecss);
+app.get('/sentiment', routes.sentiment);
 app.get('*', routes.fileNotFound); // 404 page should always be last
-
 // Events
 var events = require('./events');
 
