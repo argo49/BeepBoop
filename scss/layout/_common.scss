@@ -22,6 +22,15 @@ html, body, .container, .row, .column {
 
 .chat {
     padding: 1em;
+    display: inline-block;
+}
+
+.chat.user {
+    background-color: #0cf;
+}
+
+.chat.cb {
+    background-color: #4ae886;
 }
 
 .system {
@@ -30,8 +39,10 @@ html, body, .container, .row, .column {
 }
 
 .notification {
-    text-align: center;
-    color: #eee;
+    left: 0;
+    right: 0;
+    color: #888;
     position: absolute;
+    display: inline-block;
     bottom: 0;
 }
