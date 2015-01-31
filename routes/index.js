@@ -26,6 +26,7 @@ routes.sentiment = function(req, res){
     .end(function (result) {
           console.log(result.status, result.headers, result.body);
        // console.log(url)
+          res.send(result)
     });
 
 }
