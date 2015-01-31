@@ -22,18 +22,25 @@ html, body, .container, .row, .column {
 
 .chat {
     padding: 1em;
+    margin: 0.5em;
     display: inline-block;
+    clear: both;
+    border-radius: 0.5em;
 }
 
 .chat.user {
     background-color: #0cf;
+    float: right;
 }
 
 .chat.cb {
     background-color: #4ae886;
+    float: left;
 }
 
 .system {
+    display: block;
+    clear: both;
     background-color: #eee;
     text-align: center;
 }

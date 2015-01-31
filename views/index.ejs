@@ -33,13 +33,11 @@
         recognition.onerror = function (error) {
             console.log(error);
             $('#inital').show();
-            //recognition.start();
         }
 
         recognition.onend = function (data) {
             console.log(data);
             $('#inital').show();
-            recognition.start();
         }
 
         recognition.onspeechend = function (data) {
@@ -61,8 +59,7 @@
 
             // Your speech in text
             console.log(text);
-
-
+            $('#chat').append($('<div class="user chat">' + text + '</div>'));
 
             $.ajax({
                 url: '/cleverbot',
@@ -75,6 +72,8 @@
                 console.log(data.message);
                 var msg = new SpeechSynthesisUtterance(data.message);
                 window.speechSynthesis.speak(msg);
+
+                $('#chat').append($('<div class="cb chat">' + data.message + '</div>'));
 
                 doneThinking();
 
