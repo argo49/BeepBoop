@@ -10,3 +10,28 @@ h1 {
 a {
     color: $c-highlight;
 }
+
+html, body, .container, .row, .column {
+    height: 100%;
+}
+
+#chat {
+    position: relative;
+    height: 80%;
+}
+
+.chat {
+    padding: 1em;
+}
+
+.system {
+    background-color: #eee;
+    text-align: center;
+}
+
+.notification {
+    text-align: center;
+    color: #eee;
+    position: absolute;
+    bottom: 0;
+}
