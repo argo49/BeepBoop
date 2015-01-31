@@ -16,36 +16,63 @@
         </div>
     </div>
 
+    <script type="text/javascript" src="https://rawgithub.com/hiddentao/google-tts/master/google-tts.min.js"></script>
+    <script src="js/mespeak.js"></script>
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.2/jquery.min.js"></script>
     <script type="text/javascript">
         var user = document.getElementById('user');
         var cb   = document.getElementById('cb');
 
+        var tts = new GoogleTTS();
+
+        // Speech to text
         var recognition            = new webkitSpeechRecognition();
         recognition.continuous     = true;
         recognition.interimResults = false;
 
         recognition.onresult = function(event) {
-            console.log(event);
-            for (var i = 0; i < event.results.length; i++) {
-                var text = event.results[i][0].transcript;
+            var text = event.results[event.results.length - 1][0].transcript;
 
-                console.log(text);
+            // Your speech in text
+            console.log(text);
 
-                $.ajax({
-                    url: '/cleverbot',
-                    type: 'GET',
-                    data: {text: text},
-                })
-                .done(function(data) {
-                    console.log(data.message);
-                })
-                .fail(function() {
-                    console.log("error");
-                });
+            $.ajax({
+                url: '/cleverbot',
+                type: 'GET',
+                data: {text: text},
+            })
+            .done(function(data) {
+                // Text to speech
+                console.log(data.message);
+                var msg = new SpeechSynthesisUtterance(data.message);
+                window.speechSynthesis.speak(msg);
 
-            };
+            })
+            .fail(function() {
+                console.log("error");
+            });
+
         }
+
+        function textToSpeech () {
+            $.ajax({
+                url: '/path/to/file',
+                type: 'default GET (Other values: POST)',
+                dataType: 'default: Intelligent Guess (Other values: xml, json, script, or html)',
+                data: {param1: 'value1'},
+            })
+            .done(function() {
+                console.log("success");
+            })
+            .fail(function() {
+                console.log("error");
+            })
+            .always(function() {
+                console.log("complete");
+            });
+
+        }
+
         recognition.start();
 
     </script>
