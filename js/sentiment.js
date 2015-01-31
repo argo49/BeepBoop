@@ -1,9 +1,35 @@
-var unirest = require('unirest');
+//get the object
+//courtesy of taewook kang
+
+var moodTags = {
+    "positive": [ "excellent", "great", "fine", "pleasing", "capital", "acceptable", "pleasant", "worthy", "first-class", "divine", "splendid", "satisfactory", "superb", "enjoyable", "awesome", "dope", "world-class", "admirable", "agreeable", "super", "pleasurable", "wicked", "first-rate", "tiptop", "bitchin'"],
+    "negative": ["inferior", "poor", "inadequate", "pathetic", "faulty", "unsatisfactory", "mediocre", "defective", "second-class", "deficient", "imperfect", "second-rate", "shoddy", "low-grade", "erroneous", "substandard"],
+    "neutral":  ["unbiased", "impartial", "disinterested", "even-handed", "dispassionate", "sitting on the fence", "uninvolved", "noncommittal"]
+};
+
+var sentiment;
+
+function getSentiment(sentObj){
+    var mood = sentObj.sentiment-text;
+    var weight = sentObj.sentiment-score;
+
+    switch (mood) {
+        case 'positive':
+            sentiment = moodTags.positive[Math.floor(Math.random()*moodTags.positive.length];
+            break;
+        case 'negative':
+            sentiment =moodTags.negative[Math.floor(Math.random()*moodTags.negative.length];
+            break;
+
+        case "neutral":
+            sentiment  = moodTags.neutral[Math.floor(Math.random()*moodTags.neutral.length];
+            break;
+
+        default:
+            //play a random song
+            break;
+
+    }
 
 
-unirest.get("https://loudelement-free-natural-language-processing-service.p.mashape.com/nlp-text/?text=Friends+and+fellow+sailors+mourned+double+Olympic+medalist+Andrew+%22Bart%22+Simpson+after+the+shocking+news+that+he+had+died+in+San+Francisco+Bay+while+training+for+the+America's+Cup.")
-.header("X-Mashape-Key", "gV0cBZ0GATmshi87OTv5T1dh8Awwp15hBQUjsn1kGj9IzBX7RD")
-.header("Accept", "application/json")
-.end(function (result) {
-      console.log(result.status, result.headers, result.body);
-});
+}
