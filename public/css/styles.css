@@ -48,6 +48,12 @@ h1, h2, h3, h4, h5, h6 {
 h1 {
   padding-bottom: 0.67em;
   border-bottom: 1px solid rgba(0, 0, 0, 0.24); }
+  h1 span.tagline {
+    font-size: 0.5em;
+    color: #555; }
+  h1 span.lower {
+    margin-top: 0.5em;
+    display: inline-block; }
 
 a {
   color: #5677fc; }
@@ -59,6 +65,7 @@ html, body, .container, .row, .column {
   position: relative;
   height: 70%;
   overflow-y: scroll;
+  overflow-x: hidden;
   margin-bottom: 1em; }
 
 .chat {
@@ -69,10 +76,51 @@ html, body, .container, .row, .column {
   border-radius: 0.5em; }
 
 .chat.user {
-  background-color: #0cf;
-  float: right; }
+  position: relative;
+  padding: 0px;
+  background: #A3E7FF;
+  -webkit-border-radius: 10px;
+  -moz-border-radius: 10px;
+  border-radius: 10px; }
+
+.chat.user:after {
+  content: '';
+  position: absolute;
+  border-style: solid;
+  border-width: 14px 0 14px 19px;
+  border-color: transparent #A3E7FF;
+  display: block;
+  width: 0;
+  right: -19px;
+  top: 12px; }
+
+.chat.user {
+  padding: 1em;
+  float: right;
+  margin-right: 1.2em; }
 
 .chat.cb {
+  position: relative;
+  padding: 0px;
+  background: #A3E7AB;
+  -webkit-border-radius: 10px;
+  -moz-border-radius: 10px;
+  border-radius: 10px; }
+
+.chat.cb:after {
+  content: '';
+  position: absolute;
+  border-style: solid;
+  border-width: 14px 19px 14px 0;
+  border-color: transparent #A3E7AB;
+  display: block;
+  width: 0;
+  left: -19px;
+  top: 12px; }
+
+.chat.cb {
+  padding: 1em;
+  margin-left: 1em;
   background-color: #4ae886;
   float: left; }
   .chat.cb iframe {
