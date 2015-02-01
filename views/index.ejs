@@ -4,14 +4,16 @@
     <title>BeepBoop</title>
     <link rel="stylesheet" type="text/css" href="css/normalize.css">
     <link rel="stylesheet" type="text/css" href="css/styles.css">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
 </head>
 <body>
     <div class="container">
         <div class="row clearfix">
             <div class="column full">
                 <h1>BeepBoop</h1>
-                <div id="user"></div>
-                <div id="cb"></div>
+                <div id="chat">
+                    <div id="inital" class="chat system">Allow us to use your microphone to get you talking!</div>
+                </div>
             </div>
         </div>
     </div>
@@ -21,31 +23,83 @@
         var user = document.getElementById('user');
         var cb   = document.getElementById('cb');
 
+        // Speech to text
         var recognition            = new webkitSpeechRecognition();
         recognition.continuous     = true;
         recognition.interimResults = false;
 
-        recognition.onresult = function(event) {
-            console.log(event);
-            for (var i = 0; i < event.results.length; i++) {
-                var text = event.results[i][0].transcript;
+        console.log(recognition);
 
-                console.log(text);
-
-                $.ajax({
-                    url: '/cleverbot',
-                    type: 'GET',
-                    data: {text: text},
-                })
-                .done(function(data) {
-                    console.log(data.message);
-                })
-                .fail(function() {
-                    console.log("error");
-                });
-
-            };
+        recognition.onerror = function (error) {
+            console.log(error);
+            $('#inital').show();
         }
+
+        recognition.onend = function (data) {
+            console.log(data);
+            $('#inital').show();
+        }
+
+        recognition.onspeechend = function (data) {
+            console.log(data);
+        }
+
+        recognition.onspeechstart = function (data) {
+            console.log(data);
+            thinking();
+        }
+
+        // Remove notification when mic is enabled
+        recognition.onstart = function () {
+            $('#inital').hide();
+        }
+
+        recognition.onresult = function(event) {
+            var text = event.results[event.results.length - 1][0].transcript;
+
+            // Your speech in text
+            console.log(text);
+            $('#chat').append($('<div class="user chat">' + text + '</div>'));
+
+            $.ajax({
+                url: '/cleverbot',
+                type: 'GET',
+                // send it what you said
+                data: {text: text},
+            })
+            .done(function(data) {
+                // Text to speech
+                console.log(data.message);
+                var msg = new SpeechSynthesisUtterance(data.message);
+                window.speechSynthesis.speak(msg);
+
+                $('#chat').append($('<div class="cb chat">' + data.message + '</div>'));
+
+                doneThinking();
+
+            })
+            .fail(function() {
+                console.log("error");
+            });
+
+        }
+
+        function userChatItem (str) {
+
+        }
+
+        function cbChatItem () {
+
+        }
+
+        function thinking () {
+            $('#chat').append($('<div class="notification">BeepBoop is thinking...</div>'));
+        }
+
+        function doneThinking () {
+            $('#chat').find('.notification').remove();
+        }
+
         recognition.start();
 
     </script>

@@ -1,9 +1,13 @@
 var app       = require('../app');
 var app2      = require('unirest');
 var Cleverbot = require('cleverbot-node');
+<<<<<<< HEAD
 var sentiment = require('../js/sentiment');
 var soundcloud = require('soundcloud');
 var jquery = require('jquery');
+=======
+var unirest   = require("unirest");
+>>>>>>> 3e67f21cf0e5424510ce81c464c8c1acd3fa77dd
 
 // Create one global cleverbot for the server
     var marvin = new Cleverbot();
@@ -74,12 +78,9 @@ routes.sentiment = function(req, res){
 }
 
 routes.cleverbot = function (req, res) {
-    console.log(req.query.text, res);
     marvin.write(req.query.text, function (response) {
         res.json(response);
     });
-
-
 }
 
 
