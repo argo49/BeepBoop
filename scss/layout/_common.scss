@@ -51,7 +51,7 @@ h1 {
 {
 position: relative;
 padding: 0px;
-background: #A3E7FF;
+background: white;
 -webkit-border-radius: 10px;
 -moz-border-radius: 10px;
 border-radius: 10px;
@@ -63,7 +63,7 @@ content: '';
 position: absolute;
 border-style: solid;
 border-width: 14px 0 14px 19px;
-border-color: transparent #A3E7FF;
+border-color: transparent red;
 display: block;
 width: 0;
 right: -19px;
@@ -73,15 +73,17 @@ top: 12px;
 
 .chat.user {
     padding: 1em;
+    color:red;
     float:right;
     margin-right: 1.2em;
+    border: 1px solid red;
 }
 
 .chat.cb
 {
 position: relative;
 padding: 0px;
-background: #A3E7AB;
+background: red;
 -webkit-border-radius: 10px;
 -moz-border-radius: 10px;
 border-radius: 10px;
@@ -93,7 +95,7 @@ content: '';
 position: absolute;
 border-style: solid;
 border-width: 14px 19px 14px 0;
-border-color: transparent #A3E7AB;
+border-color: transparent red;
 display: block;
 width: 0;
 left: -19px;
@@ -103,7 +105,8 @@ top: 12px;
 .chat.cb {
     padding: 1em;
     margin-left: 1em;
-    background-color: #4ae886;
+    background-color: red;
+    color: white;
     float: left;
 
     iframe {
@@ -156,5 +159,6 @@ top: 12px;
         transform: translateY(-50%);
         position: relative;
         text-align: center;
+        color: white;
     }
 }
