@@ -21,6 +21,10 @@
 
     </div>
 
+    <div id="dimmer">
+        <h1>SPEAK</h1>
+    </div>
+
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.2/jquery.min.js"></script>
     <script type="text/javascript">
         var user = document.getElementById('user');
@@ -37,6 +41,8 @@
             recognition.start();
         });
 
+        $('#dimmer').hide();
+
         recognition.onerror = function (error) {
             console.log(error);
             $('#inital').show();
@@ -44,7 +50,15 @@
 
         recognition.onend = function (data) {
             console.log(data);
-            $('#inital').show();
+            $('#dimmer').hide();
+        }
+
+        recognition.onaudiostart = function () {
+            $('#dimmer').show();
+        }
+
+        recognition.onaudioend = function () {
+            $('#dimmer').hide();
         }
 
         recognition.onspeechend = function (data) {
@@ -70,6 +84,7 @@
             var chat = $('#chat');
 
             chat.append($('<div class="user chat">' + text + '</div>'));
+            scrollChat();
 
             var ttlc = text.toLowerCase();
 
@@ -87,6 +102,11 @@
                 askCleverBot(text);
             }
 
+        }
+
+        function scrollChat () {
+            var objDiv = document.getElementById("chat");
+            objDiv.scrollTop = objDiv.scrollHeight;
         }
 
         function playMusic (text) {
@@ -114,6 +134,7 @@
                         .replace('/attachments', '')) + '&auto_play=true');
 
                 $('.cb.chat').last().append(video);
+                scrollChat();
             })
             .fail(function() {
                 console.log("error");
@@ -170,6 +191,7 @@
             var msg = new SpeechSynthesisUtterance(str);
             window.speechSynthesis.speak(msg);
             $('#chat').append($('<div class="cb chat">' + str + '</div>'));
+            scrollChat();
         }
 
         function thinking () {

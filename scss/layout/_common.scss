@@ -18,7 +18,7 @@ html, body, .container, .row, .column {
 #chat {
     position: relative;
     height: 70%;
-    overflow-y: auto;
+    overflow-y: scroll;
     margin-bottom: 1em;
 }
 
@@ -69,4 +69,24 @@ html, body, .container, .row, .column {
     clear: both;
     background-color: #fff200;
     cursor: pointer;
+}
+
+#dimmer {
+
+    position: fixed;
+    top: 0;
+    background-color: rgba(0,0,0,0.5);
+    color: #fff;
+    height: 100%;
+    width: 100%;
+    font-weight: 700;
+    font-size: 2em;
+
+    h1 {
+        border: none;
+        top:50%;
+        transform: translateY(-50%);
+        position: relative;
+        text-align: center;
+    }
 }
