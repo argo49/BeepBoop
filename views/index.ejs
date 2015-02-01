@@ -14,8 +14,11 @@
                 <div id="chat">
                     <div id="inital" class="chat system">Allow us to use your microphone to get you talking!</div>
                 </div>
+                <div id="speak">Reply</div>
             </div>
+
         </div>
+
     </div>
 
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.2/jquery.min.js"></script>
@@ -25,10 +28,14 @@
 
         // Speech to text
         var recognition            = new webkitSpeechRecognition();
-        recognition.continuous     = true;
+        recognition.continuous     = false;
         recognition.interimResults = false;
 
         console.log(recognition);
+
+        $('#speak').on('click', function () {
+            recognition.start();
+        });
 
         recognition.onerror = function (error) {
             console.log(error);
@@ -100,7 +107,7 @@
             $('#chat').find('.notification').remove();
         }
 
-        recognition.start();
+        //recognition.start();
 
     </script>
 </body>
