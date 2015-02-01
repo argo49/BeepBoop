@@ -13,7 +13,6 @@
             <div class="column full">
                 <h1>Scarlet <span class="tagline">Artificial "Intelligence"</span></h1>
                 <div id="chat">
-                    <div id="inital" class="chat system">Allow us to use your microphone to get you talking!</div>
                 </div>
                 <div id="speak" class="action-btn">Reply</div>
             </div>
@@ -46,7 +45,6 @@
 
         recognition.onerror = function (error) {
             console.log(error);
-            $('#inital').show();
         }
 
         recognition.onend = function (data) {
@@ -73,7 +71,6 @@
 
         // Remove notification when mic is enabled
         recognition.onstart = function () {
-            $('#inital').hide();
         }
 
         recognition.onresult = function(event) {

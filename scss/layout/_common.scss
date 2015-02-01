@@ -5,9 +5,13 @@ h1, h2, h3, h4, h5, h6 {
 h1 {
     padding-bottom: $gap;
     border-bottom: 1px solid $c-border;
+    font-size: 3em;
+    margin: 0;
+    padding: 0;
+
     span.tagline {
         font-size: 0.5em;
-        color: rgba(255,255,255, 0.8);
+        color: rgba(255,0,0, 0.7);
     }
 }
 
@@ -20,13 +24,9 @@ html, body, .container, .row, .column {
 }
 
 h1 {
-    color: white;
+    color: red;
     font-family: 'Pacifico', cursive;
     margin-bottom: 0;
-}
-
-body {
-    background-color: #f00;
 }
 
 #chat {
@@ -133,8 +133,9 @@ top: 12px;
     padding: 1em;
     border-radius: 0.5em;
     display: inline-block;
+    color: white;
     clear: both;
-    background-color: #fff200;
+    background-color: red;
     cursor: pointer;
 }
 

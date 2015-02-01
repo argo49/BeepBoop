@@ -47,10 +47,13 @@ h1, h2, h3, h4, h5, h6 {
 
 h1 {
   padding-bottom: 0.67em;
-  border-bottom: 1px solid rgba(0, 0, 0, 0.24); }
+  border-bottom: 1px solid rgba(0, 0, 0, 0.24);
+  font-size: 3em;
+  margin: 0;
+  padding: 0; }
   h1 span.tagline {
     font-size: 0.5em;
-    color: rgba(255, 255, 255, 0.8); }
+    color: rgba(255, 0, 0, 0.7); }
 
 a {
   color: #5677fc; }
@@ -59,12 +62,9 @@ html, body, .container, .row, .column {
   height: 100%; }
 
 h1 {
-  color: white;
+  color: red;
   font-family: 'Pacifico', cursive;
   margin-bottom: 0; }
-
-body {
-  background-color: #f00; }
 
 #chat {
   position: relative;
@@ -152,8 +152,9 @@ body {
   padding: 1em;
   border-radius: 0.5em;
   display: inline-block;
+  color: white;
   clear: both;
-  background-color: #fff200;
+  background-color: red;
   cursor: pointer; }
 
 #dimmer {
