@@ -19,6 +19,7 @@ html, body, .container, .row, .column {
     position: relative;
     height: 70%;
     overflow-y: auto;
+    margin-bottom: 1em;
 }
 
 .chat {
@@ -37,6 +38,10 @@ html, body, .container, .row, .column {
 .chat.cb {
     background-color: #4ae886;
     float: left;
+
+    iframe {
+        margin-top: 1em;
+    }
 }
 
 .system {

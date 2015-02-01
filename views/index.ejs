@@ -14,7 +14,7 @@
                 <div id="chat">
                     <div id="inital" class="chat system">Allow us to use your microphone to get you talking!</div>
                 </div>
-                <div id="speak">Reply</div>
+                <div id="speak" class="action-btn">Reply</div>
             </div>
 
         </div>
@@ -71,8 +71,15 @@
 
             chat.append($('<div class="user chat">' + text + '</div>'));
 
-            if (text.toLowerCase().indexOf("i'm feeling") > -1 || text.toLowerCase().indexOf("i am feeling") > -1) {
+            var ttlc = text.toLowerCase();
+
+            if (ttlc.indexOf("i'm feeling")  > -1 ||
+                ttlc.indexOf("i am feeling") > -1 ||
+                ttlc.indexOf("i feel")       > -1) {
                 playMusic(text);
+            } else if ((ttlc.indexOf("what's") > -1 || ttlc.indexOf("what is") > -1) &&
+                ttlc.indexOf("temperature") > -1) {
+                checkTemp(text);
             } else {
                 askCleverBot(text);
             }
@@ -88,18 +95,54 @@
             })
             .done(function(data) {
                 // Text to speech
-                console.log(data.body.sentiment-text);
-                var msg = new SpeechSynthesisUtterance(data.message);
-                window.speechSynthesis.speak(msg);
-
-
-                $('#chat').append($('<div class="cb chat">' + data.message + '</div>'));
-
+                console.log(data);
+                cbSpeak("I have a song for you, it's called " + data.title + " by " + data.user.username);
                 doneThinking();
 
+                // insert music into DOM
+                var video = document.createElement('iframe');
+                video.setAttribute('width', '100%');
+                video.setAttribute('height', '100%');
+                video.setAttribute('scrolling', 'no');
+                video.setAttribute('frameborder', 'no');
+                console.log(data.attachments_uri.replace('api.',''));
+                video.setAttribute('src', 'https://w.soundcloud.com/player/?url=' +
+                    encodeURIComponent(data.attachments_uri
+                        .replace('/attachments', '')) + '&auto_play=true');
+
+                $('.cb.chat').last().append(video);
             })
             .fail(function() {
                 console.log("error");
+            });
+        }
+
+        function checkTemp (text) {
+            edisonCheck('temp');
+        }
+
+        function checkLight (text) {
+            edisonCheck('light');
+        }
+
+        function checkSound (text) {
+            edisonCheck('sound');
+        }
+
+        function edisonCheck (type) {
+            $.ajax({
+                url: 'http://192.168.2.15:3000/' + type,
+                type: 'GET',
+            })
+            .done(function(data) {
+                // Text to speech
+                console.log("Edison Data: ", data);
+                cbSpeak(data.message);
+                doneThinking();
+            })
+            .fail(function() {
+                console.log("error");
+                cbSpeak("Sorry, something is wrong with the Edison board!");
             });
         }
 
@@ -113,25 +156,18 @@
             .done(function(data) {
                 // Text to speech
                 console.log(data.message);
-                var msg = new SpeechSynthesisUtterance(data.message);
-                window.speechSynthesis.speak(msg);
-
-                $('#chat').append($('<div class="cb chat">' + data.message + '</div>'));
-
+                cbSpeak(data.message);
                 doneThinking();
-
             })
             .fail(function() {
                 console.log("error");
             });
         }
 
-        function userChatItem (str) {
-
-        }
-
-        function cbChatItem () {
-
+        function cbSpeak (str) {
+            var msg = new SpeechSynthesisUtterance(str);
+            window.speechSynthesis.speak(msg);
+            $('#chat').append($('<div class="cb chat">' + str + '</div>'));
         }
 
         function thinking () {
