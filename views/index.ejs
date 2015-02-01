@@ -66,8 +66,44 @@
 
             // Your speech in text
             console.log(text);
-            $('#chat').append($('<div class="user chat">' + text + '</div>'));
 
+            var chat = $('#chat');
+
+            chat.append($('<div class="user chat">' + text + '</div>'));
+
+            if (text.toLowerCase().indexOf("i'm feeling") > -1 || text.toLowerCase().indexOf("i am feeling") > -1) {
+                playMusic(text);
+            } else {
+                askCleverBot(text);
+            }
+
+        }
+
+        function playMusic (text) {
+            $.ajax({
+                url: '/sentiment',
+                type: 'GET',
+                // send it what you said
+                data: text,
+            })
+            .done(function(data) {
+                // Text to speech
+                console.log(data.body.sentiment-text);
+                var msg = new SpeechSynthesisUtterance(data.message);
+                window.speechSynthesis.speak(msg);
+
+
+                $('#chat').append($('<div class="cb chat">' + data.message + '</div>'));
+
+                doneThinking();
+
+            })
+            .fail(function() {
+                console.log("error");
+            });
+        }
+
+        function askCleverBot (text) {
             $.ajax({
                 url: '/cleverbot',
                 type: 'GET',
@@ -88,7 +124,6 @@
             .fail(function() {
                 console.log("error");
             });
-
         }
 
         function userChatItem (str) {
