@@ -50,10 +50,7 @@ h1 {
   border-bottom: 1px solid rgba(0, 0, 0, 0.24); }
   h1 span.tagline {
     font-size: 0.5em;
-    color: #555; }
-  h1 span.lower {
-    margin-top: 0.5em;
-    display: inline-block; }
+    color: rgba(255, 255, 255, 0.8); }
 
 a {
   color: #5677fc; }
@@ -61,12 +58,21 @@ a {
 html, body, .container, .row, .column {
   height: 100%; }
 
+h1 {
+  color: white;
+  font-family: 'Pacifico', cursive;
+  margin-bottom: 0; }
+
+body {
+  background-color: #f00; }
+
 #chat {
   position: relative;
   height: 70%;
   overflow-y: scroll;
   overflow-x: hidden;
-  margin-bottom: 1em; }
+  margin-bottom: 1em;
+  background-color: #fff; }
 
 .chat {
   padding: 1em;
@@ -129,7 +135,7 @@ html, body, .container, .row, .column {
 .system {
   display: block;
   clear: both;
-  background-color: #eee;
+  background-color: rgba(255, 255, 255, 0.5);
   text-align: center; }
 
 .notification {
