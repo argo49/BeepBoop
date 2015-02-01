@@ -17,7 +17,8 @@ html, body, .container, .row, .column {
 
 #chat {
     position: relative;
-    height: 80%;
+    height: 70%;
+    overflow-y: auto;
 }
 
 .chat {
@@ -52,4 +53,15 @@ html, body, .container, .row, .column {
     position: absolute;
     display: inline-block;
     bottom: 0;
+}
+
+#speak {
+    text-align: right;
+    font-size: 1.2em;
+    padding: 1em;
+    border-radius: 0.5em;
+    display: inline-block;
+    clear: both;
+    background-color: #fff200;
+    cursor: pointer;
 }
