@@ -80,6 +80,9 @@
             } else if ((ttlc.indexOf("what's") > -1 || ttlc.indexOf("what is") > -1) &&
                 ttlc.indexOf("temperature") > -1) {
                 checkTemp(text);
+            } else if ((ttlc.indexOf("leave the") > -1 || ttlc.indexOf("leave on") > -1) &&
+                (ttlc.indexOf("light") > -1 || ttlc.indexOf("lights") > -1)) {
+                checkLight(text);
             } else {
                 askCleverBot(text);
             }
@@ -131,13 +134,12 @@
 
         function edisonCheck (type) {
             $.ajax({
-                url: 'http://192.168.2.15:3000/' + type,
+                url: 'http://138.51.223.228:3000/' + type,
                 type: 'GET',
             })
             .done(function(data) {
                 // Text to speech
-                console.log("Edison Data: ", data);
-                cbSpeak(data.message);
+                cbSpeak(data);
                 doneThinking();
             })
             .fail(function() {
