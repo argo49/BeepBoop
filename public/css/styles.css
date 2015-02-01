@@ -176,3 +176,10 @@ h1 {
     position: relative;
     text-align: center;
     color: white; }
+
+@media (max-width: 450px) {
+  h1 {
+    font-size: 2em; } }
+@media (max-width: 300px) {
+  h1 {
+    font-size: 1em; } }
